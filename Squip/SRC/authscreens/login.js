@@ -14,12 +14,13 @@ import Bottomnavigator from '../bottom/bottomnavigator';
 import {ReactButton} from '../components/reactbutton';
 import styles from '../styling/NativeStyling';
 
-
 export default function Login({navigation}) {
   const [model, setmodel] = useState([]);
 
+  const [userlogin, setuserlogin] = useState([]);
+
   const loginFunction = () => {
-    // console.log(model);
+    // console.log(userlogin);
     const objectsend = {
       email: model.email,
       password: model.password,
@@ -30,16 +31,18 @@ export default function Login({navigation}) {
         if (res.data.Status == true) {
           // console.log('If Condition');
           Alert.alert('Successful Login!');
-          navigation.navigate('Shome');
+          navigation.navigate('Shome', userlogin);
           // navigation.navigate('HomeScreen');
-        } 
-        else {
-          Alert.alert("User Not Found!");
+        } else {
+          Alert.alert('User Not Found!');
         }
-        console.log(res.data);
+        setuserlogin(res.data.Userdata);
+        // console.log(res.data.Userdata.user_name);
       })
-      .catch(err => {Alert.alert(err)});
-  //   navigation.navigate('HomeScreen');
+      .catch(err => {
+        Alert.alert(err);
+      });
+    //   navigation.navigate('HomeScreen');
   };
   return (
     <>
@@ -48,15 +51,17 @@ export default function Login({navigation}) {
           <View>
             <TouchableOpacity></TouchableOpacity>
           </View>
-          
+
           <View>
-            <View style={[styles.alignItemsCenter,styles.mt3]} >
+            <View style={[styles.alignItemsCenter, styles.mt3]}>
               <Image
                 source={require('../assest/img/Suip_logo.png')}
                 style={{width: 140, height: 90}}
               />
-            <Text style={[styles.fs50, styles.textBlack]}>Squi<Text style={[styles.textRed]}>p</Text></Text>
-              </View>
+              <Text style={[styles.fs50, styles.textBlack]}>
+                Squi<Text style={[styles.textRed]}>p</Text>
+              </Text>
+            </View>
           </View>
 
           <View style={[styles.pt4]}>

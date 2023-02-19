@@ -10,10 +10,7 @@ function Policeconfrim() {
     <View>
       <Header />
       <View style={[styles.rounded]}>
-          <ReactButton
-            onPress={() => navigation.navigate('Policedetails')}
-            label="We Are Confirming Your Call.."
-          />
+        <Text style={[styles.textRed,styles.fs3,styles.textBold]} >Your Call Is Processing</Text>
         </View>
     </View>
   );
